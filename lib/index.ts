@@ -56,7 +56,7 @@ export function jsonSchemaDocumentToOpenApi(
 
 export function openApiToJsonSchema( openApi: any )
 {
-	return openApiToJsonSchemaType( openApi.components.schemas );
+	return {
+		definitions: openApiToJsonSchemaType( openApi.components.schemas )
+	};
 }
-
-// OpenApiSchemaComponents
