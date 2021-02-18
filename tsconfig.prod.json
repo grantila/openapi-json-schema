@@ -1,0 +1,13 @@
+{
+	"extends": "./tsconfig.json",
+	"compilerOptions": {
+		"resolveJsonModule": false,
+		"sourceMap": false,
+		"outDir": "dist",
+		"noEmit": false
+	},
+	"exclude": [
+		"**/*.spec.ts",
+		"test"
+	]
+}
