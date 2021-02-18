@@ -56,7 +56,15 @@ export function jsonSchemaDocumentToOpenApi(
 
 export function openApiToJsonSchema( openApi: any )
 {
+	const schemas = openApi.components.schemas;
 	return {
-		definitions: openApiToJsonSchemaType( openApi.components.schemas )
+		definitions: Object.fromEntries(
+			Object.keys( schemas ).map( key =>
+				[
+					key,
+					openApiToJsonSchemaType( schemas[ key ] )
+				]
+			)
+		)
 	};
 }
