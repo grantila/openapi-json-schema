@@ -1,6 +1,7 @@
 import type { JSONSchema7, JSONSchema7Definition} from "json-schema"
 
 import type { OpenAPISchemaType, OpenApiSchemaTypeDefinition } from "./types"
+import { decodeRefNameOpenApi, encodeRefNameJsonSchema } from "./utils"
 
 
 function openApiTypeToJsonSchema7Type(
@@ -32,6 +33,19 @@ function openApiTypeToJsonSchema7Type(
 	}
 }
 
+function openApiToJsonSchema7Ref< T extends OpenAPISchemaType | JSONSchema7 >(
+	node: T
+)
+: T
+{
+	if ( node.$ref )
+		return {
+			...node,
+			$ref: encodeRefNameJsonSchema( decodeRefNameOpenApi( node.$ref ) ),
+		};
+	return node;
+}
+
 export function openApiToJsonSchemaType( schema: OpenApiSchemaTypeDefinition )
 : JSONSchema7Definition
 {
@@ -46,6 +60,8 @@ export function openApiToJsonSchemaType( schema: OpenApiSchemaTypeDefinition )
 	//       Look at json-schema-to-openapi-schema
 	type TODO = any;
 	let output = { ...( rest as TODO ), ...( type ? { type } : { } ) };
+
+	output = openApiToJsonSchema7Ref( output );
 
 	output = recurse( output );
 

@@ -9,7 +9,10 @@
 
 Minimalistic OpenAPI 3 ⬌ JSON Schema (draft 7) conversion.
 
- * This package aims at full conversion support except reference resolution, but today it only supports null/nullable conversion. PR's are welcome.
+ * This package aims at full conversion support except reference resolution, but isn't there yet. Currently supports:
+   * `null`/`nullable` conversion
+   * `$ref`'s being converted `#/definitions` <-> `#/components/schema`
+   * *PR's are welcome.*
  * JSON `$ref`s are not resolved.
  * This package has no dependencies, and will continue to have no dependencies - re: minimalistic.
 
@@ -30,7 +33,9 @@ const jsonSchema = openApiSchemaToJsonSchema( openApi );
 ```
 
 
-## JSON Schema to OpenAPI
+## Utilities
+
+The library exports utilities; `encodeRefNameJsonSchema`, `decodeRefNameJsonSchema`, `encodeRefNameOpenApi` and `decodeRefNameOpenApi` used to convert to/from references names, and their corresponding encoding in JSON Schema and Open API.
 
 
 [npm-image]: https://img.shields.io/npm/v/openapi-json-schema.svg

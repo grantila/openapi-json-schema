@@ -81,4 +81,18 @@ describe( "JSON Schema to OpenAPI", ( ) =>
 
 		ensureValidOpenAPI( decorate( openApiSchema ) );
 	} );
+
+	it( "should convert $ref", ( ) =>
+	{
+		const schema: JSONSchema7Definition = {
+			$ref: '#/definitions/Foo',
+			description: 'Foo description',
+		};
+		const jsonSchema = jsonSchemaTypeToOpenApi( schema );
+
+		expect( jsonSchema ).toStrictEqual( {
+			$ref: '#/components/schema/Foo',
+			description: 'Foo description',
+		} );
+	} );
 } );

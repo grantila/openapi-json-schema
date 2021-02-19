@@ -92,4 +92,20 @@ describe( "OpenAPI to JSON Schema", ( ) =>
 
 		ensureValidJSONSchema( jsonSchema );
 	} );
+
+	it( "should convert $ref", ( ) =>
+	{
+		const schema: OpenApiSchemaTypeDefinition = {
+			$ref: '#/components/schema/Foo',
+			description: 'Foo description',
+		};
+		const jsonSchema = openApiToJsonSchemaType( schema );
+
+		expect( jsonSchema ).toStrictEqual( {
+			$ref: '#/definitions/Foo',
+			description: 'Foo description',
+		} );
+
+		ensureValidJSONSchema( jsonSchema );
+	} );
 } );

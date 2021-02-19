@@ -6,7 +6,8 @@ import type {
 	JSONSchema7Definition,
 } from "json-schema"
 
-import type { OpenApiSchemaTypeDefinition } from "./types"
+import type { OpenAPISchemaType, OpenApiSchemaTypeDefinition } from "./types"
+import { decodeRefNameJsonSchema, encodeRefNameOpenApi } from "./utils";
 
 
 type LooseJSONSchemaType = JSONSchema4TypeName | JSONSchema7TypeName;
@@ -53,6 +54,19 @@ function jsonSchemaTypeToOpenApiConvertType( schema: JSONSchema7 )
 	return decorateType( decorateNullable( rest ), type );
 }
 
+function jsonSchemaToOpenApi7Ref< T extends OpenAPISchemaType | JSONSchema7 >(
+	node: T
+)
+: T
+{
+	if ( node.$ref )
+		return {
+			...node,
+			$ref: encodeRefNameOpenApi( decodeRefNameJsonSchema( node.$ref ) ),
+		};
+	return node;
+}
+
 export function jsonSchemaTypeToOpenApi( schema: JSONSchema7Definition )
 : OpenApiSchemaTypeDefinition
 {
@@ -60,6 +74,8 @@ export function jsonSchemaTypeToOpenApi( schema: JSONSchema7Definition )
 		return schema;
 
 	schema = jsonSchemaTypeToOpenApiConvertType( schema as JSONSchema7 );
+
+	schema = jsonSchemaToOpenApi7Ref( schema );
 
 	schema = recurse( schema );
 

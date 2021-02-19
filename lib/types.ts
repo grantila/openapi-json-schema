@@ -57,7 +57,7 @@ export type OpenAPISchemaType =
 	Omit< JSONSchema4, 'type' >
 	&
 	{
-		type: OpenAPITypeName;
+		type?: OpenAPITypeName;
 	};
 
 export type OpenApiSchemaTypeDefinition = OpenAPISchemaType | boolean;
