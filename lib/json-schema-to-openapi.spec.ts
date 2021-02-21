@@ -1,9 +1,13 @@
-import { JSONSchema7Definition } from 'json-schema'
+import { JSONSchema7, JSONSchema7Definition } from 'json-schema'
 
-import { ensureValidOpenAPI } from '../test'
+import { ensureValidOpenAPI, makeRecursableSchema } from '../test'
 import { decorateOpenApi, /* jsonSchemaDocumentToOpenApi */ } from './'
 import { jsonSchemaTypeToOpenApi } from './json-schema-to-openapi'
-import { PartialOpenApiSchema, OpenApiSchemaTypeDefinition } from './types'
+import {
+	OpenAPISchemaType,
+	PartialOpenApiSchema,
+	OpenApiSchemaTypeDefinition,
+} from './types'
 
 
 const decorate = ( type: OpenApiSchemaTypeDefinition ): PartialOpenApiSchema =>
@@ -94,5 +98,38 @@ describe( "JSON Schema to OpenAPI", ( ) =>
 			$ref: '#/components/schema/Foo',
 			description: 'Foo description',
 		} );
+	} );
+
+	describe( "recursion", ( ) =>
+	{
+		interface TestType {
+			name: string;
+			from: Partial< JSONSchema7 >;
+			to: Partial< OpenAPISchemaType >;
+		}
+
+		const tests: Array< TestType > = [
+			{
+				name: 'nullable (false)',
+				from: { type: 'string' },
+				to: { type: 'string' },
+			},
+			{
+				name: 'nullable (true)',
+				from: { type: [ 'string', 'null' ] },
+				to: { type: 'string', nullable: true },
+			},
+		];
+
+		tests.forEach( ( { name, from, to } ) =>
+			it( `should convert ${name}`, ( ) =>
+			{
+				const schema = makeRecursableSchema( from );
+				const jsonSchema = jsonSchemaTypeToOpenApi( schema );
+				const expected = makeRecursableSchema( to );
+
+				expect( jsonSchema ).toStrictEqual( expected );
+			} )
+		);
 	} );
 } );

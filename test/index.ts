@@ -1,12 +1,13 @@
 import Ajv from 'ajv'
 import addFormats from "ajv-formats"
+import { JSONSchema7Definition } from 'json-schema'
 
 // TODO: Change 6 to 4 when conversion is more complete
 import * as draft06 from "ajv/lib/refs/json-schema-draft-06.json"
 
 import * as openApiSchema from "./fixtures/openapi.schema.json"
-import { PartialOpenApiSchema } from "../lib/types"
-import { JSONSchema7Definition } from 'json-schema'
+import type { PartialOpenApiSchema } from "../lib/types"
+import type { AnySchema } from "../lib/utils"
 
 export function ensureValidOpenAPI( schema: PartialOpenApiSchema )
 {
@@ -33,3 +34,37 @@ export function ensureValidJSONSchema( schema: JSONSchema7Definition )
 		throw new Error( "Invalid OpenAPI schema" );
 	}
 }
+
+const clone = < T >( t: T ): T => JSON.parse( JSON.stringify( t ) );
+
+export const makeRecursableSchema =
+	< T extends AnySchema >( typeData: Partial< T > ): T => clone( {
+		type: 'object',
+		properties: {
+			asArray: {
+				items: [ typeData ],
+			},
+			prop: typeData,
+		},
+		items: typeData,
+		additionalItems: typeData,
+		contains: typeData,
+		patternProperties: {
+			prop: typeData,
+		},
+		additionalProperties: typeData,
+		dependencies: {
+			prop: typeData,
+		},
+		propertyNames: typeData,
+		if: typeData,
+		then: typeData,
+		else: typeData,
+		allOf: [ typeData ],
+		anyOf: [ typeData ],
+		oneOf: [ typeData ],
+		not: typeData,
+		definitions: {
+			prop: typeData,
+		},
+	} ) as AnySchema as T;

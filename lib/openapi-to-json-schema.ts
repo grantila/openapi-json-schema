@@ -1,7 +1,7 @@
 import type { JSONSchema7, JSONSchema7Definition} from "json-schema"
 
 import type { OpenAPISchemaType, OpenApiSchemaTypeDefinition } from "./types"
-import { decodeRefNameOpenApi, encodeRefNameJsonSchema } from "./utils"
+import { decodeRefNameOpenApi, encodeRefNameJsonSchema, recurseSchema } from "./utils"
 
 
 function openApiTypeToJsonSchema7Type(
@@ -63,30 +63,5 @@ export function openApiToJsonSchemaType( schema: OpenApiSchemaTypeDefinition )
 
 	output = openApiToJsonSchema7Ref( output );
 
-	output = recurse( output );
-
-	return output;
-}
-
-// Recurse properties, items, etc
-function recurse( schema: OpenAPISchemaType ): JSONSchema7Definition
-{
-	if ( schema.properties && Object.keys( schema.properties ) )
-		schema = {
-			...schema,
-			properties: Object.fromEntries(
-				Object.keys( schema.properties )
-				.map( key =>
-					[
-						key,
-						openApiToJsonSchemaType(
-							( schema as JSONSchema7 ).properties?.[ key ] as
-								OpenAPISchemaType
-						) as JSONSchema7Definition
-					]
-				)
-			) as JSONSchema7[ 'properties' ],
-		};
-
-	return schema as JSONSchema7Definition;
+	return recurseSchema( output, openApiToJsonSchemaType );
 }

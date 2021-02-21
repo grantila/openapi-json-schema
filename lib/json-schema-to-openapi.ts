@@ -1,5 +1,4 @@
 import type {
-	JSONSchema4,
 	JSONSchema4TypeName,
 	JSONSchema7,
 	JSONSchema7TypeName,
@@ -7,7 +6,11 @@ import type {
 } from "json-schema"
 
 import type { OpenAPISchemaType, OpenApiSchemaTypeDefinition } from "./types"
-import { decodeRefNameJsonSchema, encodeRefNameOpenApi } from "./utils";
+import {
+	decodeRefNameJsonSchema,
+	encodeRefNameOpenApi,
+	recurseSchema,
+} from "./utils"
 
 
 type LooseJSONSchemaType = JSONSchema4TypeName | JSONSchema7TypeName;
@@ -77,32 +80,6 @@ export function jsonSchemaTypeToOpenApi( schema: JSONSchema7Definition )
 
 	schema = jsonSchemaToOpenApi7Ref( schema );
 
-	schema = recurse( schema );
-
-	// TODO: Proper draft 7-to-4 conversion instead of whishful cast
-	//       Look at json-schema-to-openapi-schema
-	return schema as OpenApiSchemaTypeDefinition;
-}
-
-// Recurse properties, items, etc
-function recurse< T extends JSONSchema7 >( schema: T ): T
-{
-	if ( schema.properties && Object.keys( schema.properties ) )
-		schema = {
-			...schema,
-			properties: Object.fromEntries(
-				Object.keys( schema.properties )
-				.map( key =>
-					[
-						key,
-						jsonSchemaTypeToOpenApi(
-							( schema as JSONSchema7 ).properties?.[ key ] as
-								JSONSchema7Definition
-						) as JSONSchema4
-					]
-				)
-			) as JSONSchema7[ 'properties' ],
-		};
-
-	return schema as T;
+	// TODO: Proper draft 7-to-4 conversion
+	return recurseSchema( schema, jsonSchemaTypeToOpenApi );
 }
