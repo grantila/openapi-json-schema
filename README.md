@@ -11,7 +11,7 @@ Minimalistic OpenAPI 3 ⬌ JSON Schema (draft 7) conversion.
 
  * This package aims at full conversion support except reference resolution, but isn't there yet. Currently supports:
    * `null`/`nullable` conversion
-   * `$ref`'s being converted `#/definitions` <-> `#/components/schema`
+   * `$ref`'s being converted `#/definitions` <-> `#/components/schemas`
    * *PR's are welcome.*
  * JSON `$ref`s are not resolved.
  * This package has no dependencies, and will continue to have no dependencies - re: minimalistic.

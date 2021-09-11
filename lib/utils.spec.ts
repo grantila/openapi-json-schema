@@ -36,7 +36,7 @@ describe( "utils", ( ) =>
 		it( "should encode correctly", ( ) =>
 		{
 			expect( encodeRefNameOpenApi( "Foo" ) )
-				.toBe( "#/components/schema/Foo" );
+				.toBe( "#/components/schemas/Foo" );
 		} );
 	} );
 
@@ -44,7 +44,7 @@ describe( "utils", ( ) =>
 	{
 		it( "should decode correctly", ( ) =>
 		{
-			expect( decodeRefNameOpenApi( "#/components/schema/Foo" ) )
+			expect( decodeRefNameOpenApi( "#/components/schemas/Foo" ) )
 				.toBe( "Foo" );
 		} );
 

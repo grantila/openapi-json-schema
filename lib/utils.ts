@@ -26,13 +26,13 @@ export function decodeRefNameJsonSchema( name: string ): string
 
 export function encodeRefNameOpenApi( name: string ): string
 {
-	return `#/components/schema/${encodePathPart( name )}`;
+	return `#/components/schemas/${encodePathPart( name )}`;
 }
 
 export function decodeRefNameOpenApi( name: string ): string
 {
-	if ( name.startsWith( "#/components/schema/" ) )
-		return decodePathPart( name.slice( 20 ) );
+	if ( name.startsWith( "#/components/schemas/" ) )
+		return decodePathPart( name.slice( 21 ) );
 	return decodePathPart( name );
 }
 

@@ -95,7 +95,7 @@ describe( "JSON Schema to OpenAPI", ( ) =>
 		const jsonSchema = jsonSchemaTypeToOpenApi( schema );
 
 		expect( jsonSchema ).toStrictEqual( {
-			$ref: '#/components/schema/Foo',
+			$ref: '#/components/schemas/Foo',
 			description: 'Foo description',
 		} );
 	} );

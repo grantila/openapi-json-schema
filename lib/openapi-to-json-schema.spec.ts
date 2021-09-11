@@ -98,7 +98,7 @@ describe( "OpenAPI to JSON Schema", ( ) =>
 	it( "should convert $ref", ( ) =>
 	{
 		const schema: OpenApiSchemaTypeDefinition = {
-			$ref: '#/components/schema/Foo',
+			$ref: '#/components/schemas/Foo',
 			description: 'Foo description',
 		};
 		const jsonSchema = openApiToJsonSchemaType( schema );
