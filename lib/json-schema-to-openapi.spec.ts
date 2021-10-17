@@ -100,6 +100,22 @@ describe( "JSON Schema to OpenAPI", ( ) =>
 		} );
 	} );
 
+	it( "should convert const to enum", ( ) =>
+	{
+		const schema: JSONSchema7Definition = {
+			type: 'string',
+			description: 'a foo',
+			const: 'foo',
+		};
+		const jsonSchema = jsonSchemaTypeToOpenApi( schema );
+
+		expect( jsonSchema ).toStrictEqual( {
+			type: 'string',
+			description: 'a foo',
+			enum: [ 'foo' ],
+		} );
+	} );
+
 	describe( "recursion", ( ) =>
 	{
 		interface TestType {

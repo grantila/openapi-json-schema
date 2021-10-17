@@ -37,6 +37,12 @@ function jsonSchemaTypeToOpenApiConvertType( schema: JSONSchema7 )
 		< T >( t: T, type: LooseJSONSchemaType | undefined ): T =>
 			( type === "any" || !type ) ? t : ( { ...t, type } );
 
+	if ( typeof schema.const !== 'undefined' )
+	{
+		rest.enum = [ schema.const ];
+		delete rest.const;
+	}
+
 	const decorateNullable = < T >( t: T ): T =>
 		nullable ? ( { ...t, nullable } ) : t;
 
