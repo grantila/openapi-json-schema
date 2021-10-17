@@ -13,6 +13,7 @@ Minimalistic OpenAPI 3 ⬌ JSON Schema (draft 7) conversion.
    * `null`/`nullable` conversion
    * `$ref`'s being converted `#/definitions` <-> `#/components/schemas`
    * `const` ➡ `enum` when converting to OpenAPI
+   * `$id`/`$comment` ➡ `info['x-id']`/`info['x-comment']` when converting to OpenAPI
    * *PR's are welcome.*
  * JSON `$ref`s are not resolved.
  * This package has no dependencies, and will continue to have no dependencies - re: minimalistic.
