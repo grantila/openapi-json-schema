@@ -25,9 +25,23 @@ export function decorateOpenApi(
 	}: JsonSchemaDocumentToOpenApiOptions
 )
 {
+	const info: PartialOpenApiSchema[ 'info' ] = { title, version };
+
+	if ( ( schema as JSONSchema7 ).$id )
+	{
+		info[ 'x-id' ] = ( schema as JSONSchema7 ).$id;
+		delete ( schema as JSONSchema7 ).$id;
+	}
+	if ( ( schema as JSONSchema7 ).$comment )
+	{
+		info[ 'x-comment' ] = ( schema as JSONSchema7 ).$comment;
+		delete ( schema as JSONSchema7 ).$comment;
+	}
+	delete ( schema as JSONSchema7 ).$schema;
+
 	return {
 		openapi: schemaVersion,
-		info: { title, version },
+		info,
 		paths: { },
 		...schema,
 	}

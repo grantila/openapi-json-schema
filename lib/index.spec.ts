@@ -9,6 +9,8 @@ describe( "JSON Schema document to OpenAPI", ( ) =>
 	it( "should convert null in document", ( ) =>
 	{
 		const schema: JSONSchema7 = {
+			$id: 'the id',
+			$comment: 'the comment',
 			definitions: {
 				foo: { type: [ "string", "null" ], description: "Foo" }
 			}
@@ -20,6 +22,26 @@ describe( "JSON Schema document to OpenAPI", ( ) =>
 		} );
 
 		ensureValidOpenAPI( openApiSchema );
+
+		expect( openApiSchema ).toStrictEqual( {
+			info: {
+				"title": "the title",
+				"version": "the version",
+				'x-id': 'the id',
+				'x-comment': 'the comment',
+			},
+			openapi: "3.0.2",
+			paths: { },
+			components: {
+				schemas: {
+					foo: {
+						type: "string",
+						nullable: true,
+						description: "Foo",
+					}
+				},
+			},
+		} );
 	} );
 } );
 

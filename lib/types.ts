@@ -12,6 +12,9 @@ export interface PartialOpenApiSchema
 		termsOfService?: string;
 		contact?: OpenApiSchemaContact;
 		license?: OpenApiLicenseContact;
+
+		'x-id'?: string;
+		'x-comment'?: string;
 	},
 	paths: Record< string, unknown >;
 
