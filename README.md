@@ -2,7 +2,6 @@
 [![downloads][downloads-image]][npm-url]
 [![build status][build-image]][build-url]
 [![coverage status][coverage-image]][coverage-url]
-[![Language grade: JavaScript][lgtm-image]][lgtm-url]
 
 
 # openapi-json-schema
@@ -43,9 +42,7 @@ The library exports utilities; `encodeRefNameJsonSchema`, `decodeRefNameJsonSche
 [npm-image]: https://img.shields.io/npm/v/openapi-json-schema.svg
 [npm-url]: https://npmjs.org/package/openapi-json-schema
 [downloads-image]: https://img.shields.io/npm/dm/openapi-json-schema.svg
-[build-image]: https://img.shields.io/github/workflow/status/grantila/openapi-json-schema/Master.svg
+[build-image]: https://img.shields.io/github/actions/workflow/status/grantila/openapi-json-schema/master.yml?branch=master
 [build-url]: https://github.com/grantila/openapi-json-schema/actions?query=workflow%3AMaster
 [coverage-image]: https://coveralls.io/repos/github/grantila/openapi-json-schema/badge.svg?branch=master
 [coverage-url]: https://coveralls.io/github/grantila/openapi-json-schema?branch=master
-[lgtm-image]: https://img.shields.io/lgtm/grade/javascript/g/grantila/openapi-json-schema.svg?logo=lgtm&logoWidth=18
-[lgtm-url]: https://lgtm.com/projects/g/grantila/openapi-json-schema/context:javascript
