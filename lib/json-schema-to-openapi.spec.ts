@@ -1,13 +1,13 @@
 import { JSONSchema7, JSONSchema7Definition } from 'json-schema'
 
-import { ensureValidOpenAPI, makeRecursableSchema } from '../test'
-import { decorateOpenApi, /* jsonSchemaDocumentToOpenApi */ } from './'
-import { jsonSchemaTypeToOpenApi } from './json-schema-to-openapi'
+import { ensureValidOpenAPI, makeRecursableSchema } from '../test/index.js'
+import { decorateOpenApi, /* jsonSchemaDocumentToOpenApi */ } from './index.js'
+import { jsonSchemaTypeToOpenApi } from './json-schema-to-openapi.js'
 import {
 	OpenAPISchemaType,
 	PartialOpenApiSchema,
 	OpenApiSchemaTypeDefinition,
-} from './types'
+} from './types.js'
 
 
 const decorate = ( type: OpenApiSchemaTypeDefinition ): PartialOpenApiSchema =>

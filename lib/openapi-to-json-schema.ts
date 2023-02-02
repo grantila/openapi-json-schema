@@ -1,7 +1,14 @@
-import type { JSONSchema7, JSONSchema7Definition} from "json-schema"
+import type { JSONSchema7, JSONSchema7Definition} from 'json-schema'
 
-import type { OpenAPISchemaType, OpenApiSchemaTypeDefinition } from "./types"
-import { decodeRefNameOpenApi, encodeRefNameJsonSchema, recurseSchema } from "./utils"
+import type {
+	OpenAPISchemaType,
+	OpenApiSchemaTypeDefinition,
+} from './types.js'
+import {
+	decodeRefNameOpenApi,
+	encodeRefNameJsonSchema,
+	recurseSchema,
+} from './utils.js'
 
 
 function openApiTypeToJsonSchema7Type(

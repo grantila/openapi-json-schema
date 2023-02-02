@@ -3,7 +3,7 @@ import {
 	decodeRefNameJsonSchema,
 	encodeRefNameOpenApi,
 	decodeRefNameOpenApi,
-} from "./utils"
+} from './utils.js'
 
 
 describe( "utils", ( ) =>

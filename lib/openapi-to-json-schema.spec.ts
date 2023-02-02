@@ -1,8 +1,8 @@
 import { JSONSchema7 } from 'json-schema'
 
-import { ensureValidJSONSchema, makeRecursableSchema } from '../test'
-import { openApiToJsonSchemaType } from './openapi-to-json-schema'
-import { OpenAPISchemaType, OpenApiSchemaTypeDefinition } from './types'
+import { ensureValidJSONSchema, makeRecursableSchema } from '../test/index.js'
+import { openApiToJsonSchemaType } from './openapi-to-json-schema.js'
+import { OpenAPISchemaType, OpenApiSchemaTypeDefinition } from './types.js'
 
 
 describe( "OpenAPI to JSON Schema", ( ) =>

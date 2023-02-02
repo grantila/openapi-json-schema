@@ -3,14 +3,17 @@ import type {
 	JSONSchema7,
 	JSONSchema7TypeName,
 	JSONSchema7Definition,
-} from "json-schema"
+} from 'json-schema'
 
-import type { OpenAPISchemaType, OpenApiSchemaTypeDefinition } from "./types"
+import type {
+	OpenAPISchemaType,
+	OpenApiSchemaTypeDefinition,
+} from './types.js'
 import {
 	decodeRefNameJsonSchema,
 	encodeRefNameOpenApi,
 	recurseSchema,
-} from "./utils"
+} from './utils.js'
 
 
 type LooseJSONSchemaType = JSONSchema4TypeName | JSONSchema7TypeName;

@@ -1,5 +1,6 @@
 import type { JSONSchema7Definition } from 'json-schema'
-import type { OpenApiSchemaTypeDefinition } from './types'
+
+import type { OpenApiSchemaTypeDefinition } from './types.js'
 
 
 export function encodePathPart( part: string ): string

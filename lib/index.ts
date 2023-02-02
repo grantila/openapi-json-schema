@@ -3,9 +3,9 @@ import type { JSONSchema7 } from 'json-schema'
 import type {
 	OpenApiSchemaVersion,
 	PartialOpenApiSchema,
-} from './types'
-import { jsonSchemaTypeToOpenApi } from './json-schema-to-openapi'
-import { openApiToJsonSchemaType } from './openapi-to-json-schema'
+} from './types.js'
+import { jsonSchemaTypeToOpenApi } from './json-schema-to-openapi.js'
+import { openApiToJsonSchemaType } from './openapi-to-json-schema.js'
 
 
 export interface JsonSchemaDocumentToOpenApiOptions

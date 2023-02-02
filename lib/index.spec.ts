@@ -1,8 +1,8 @@
 import { JSONSchema7 } from 'json-schema'
 
-import { ensureValidOpenAPI } from '../test'
-import { jsonSchemaDocumentToOpenApi, openApiToJsonSchema } from './index'
-import { PartialOpenApiSchema } from './types'
+import { ensureValidOpenAPI } from '../test/index.js'
+import { jsonSchemaDocumentToOpenApi, openApiToJsonSchema } from './index.js'
+import { PartialOpenApiSchema } from './types.js'
 
 describe( "JSON Schema document to OpenAPI", ( ) =>
 {

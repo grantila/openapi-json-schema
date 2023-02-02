@@ -1,13 +1,16 @@
-import Ajv from 'ajv'
+import _Ajv from 'ajv'
 import addFormats from "ajv-formats"
 import { JSONSchema7Definition } from 'json-schema'
 
 // TODO: Change 6 to 4 when conversion is more complete
-import * as draft06 from "ajv/lib/refs/json-schema-draft-06.json"
+import * as draft06 from 'ajv/lib/refs/json-schema-draft-06.json'
 
-import * as openApiSchema from "./fixtures/openapi.schema.json"
-import type { PartialOpenApiSchema } from "../lib/types"
-import type { AnySchema } from "../lib/utils"
+import * as openApiSchema from './fixtures/openapi.schema.json'
+import type { PartialOpenApiSchema } from '../lib/types.js'
+import type { AnySchema } from '../lib/utils.js'
+
+// 🤷‍♂️
+const Ajv = (_Ajv as any).default as typeof _Ajv;
 
 export function ensureValidOpenAPI( schema: PartialOpenApiSchema )
 {
